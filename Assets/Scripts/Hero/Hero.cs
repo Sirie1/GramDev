@@ -1,15 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-//using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
-//using UnityEngine.UIElements;
-//using Debug = UnityEngine.Debug;
-
 
 public class Hero : MonoBehaviour
 {
-    //Base Attributes
+    //Base Attributes. This attributes do not change when experience is gained or played a battle. They are changed if game balance or re-design is needed. 
     int heroID;
     Color heroColour;
     string heroName;
@@ -17,24 +13,23 @@ public class Hero : MonoBehaviour
     float baseAttackPower;
     float attributeIncreasePerLevel;
 
-    //In Game variable attributes. Max experience = 5, when reached 5 automatically levels up. Level increase increases hero's attack and health by 10%
+    //In Game variable attributes. This attributes may change after or during game. Max experience = 5, when reached 5 automatically levels up. Level increase increases hero's attack and health by 10%
     float maxHealth;
     float battleHealth;
     float attackPower;
     [SerializeField] bool isDead;
     bool isInCollection;
     int experience;
-    
     int level;
 
-    //Button display functionalities
+    //Button display functionalities. Needed to references to objects needed by button and display functionalities. 
     public Button myButton;
     public LifeDisplay lifeDisplay;
     public GameObject statsBackground;
     public StatsDisplay statsDisplay;
     public ButtonLongHold buttonLongHold;
     public Transform selected;
-
+    //Other References needed
     public Image heroImage;
     public Enemy enemyTarget;
     #region Gets&Setters
@@ -94,7 +89,9 @@ public class Hero : MonoBehaviour
         HeroSelected(false);
         buttonLongHold.gameObject.SetActive(false);
     }
-    //Hero config, has to check for base attributes, and see if already exists in user data. We can add it to user collection
+    //SetHeroByID sets and configures a Hero on an Hero created object. It gathers information from GameData for basic non-user information about the Hero, and from
+    //UserData if the hero already exists in UserData and have saved attributes. It also sets the value of isInCollection, depending if the ID was found in heroes
+    //UserData list. 
     public void SetHeroByID (int configID, bool AddToCollection)
     {
         heroID = configID;
@@ -155,22 +152,24 @@ public class Hero : MonoBehaviour
     {
         buttonLongHold.gameObject.SetActive(true);
     }
-
+    //Closes the attribute display when player stops clicking and disables gameobject buttonLongHold, which counts time of pressing during its update. 
     public void OnHeroRelease()
     {
         buttonLongHold.gameObject.SetActive(false);
         statsBackground.SetActive(false);
         statsDisplay.gameObject.SetActive(false);
     }
+    //If Hero is set on battle, lifebar should be visible.
     public void HeroOnBattleScreen()
     {
         lifeDisplay.gameObject.SetActive(true);
     }
+    //If Hero is on select screen lifebar should not be visible. 
     public void HeroOnSelectScreen()
     {
         lifeDisplay.gameObject.SetActive(false);
     }
-
+    //This function may be obsolete, need to work in isInCollection bool
     public void HeroInCollection(bool isInCollection)
     {
         if (!isInCollection)
@@ -186,17 +185,14 @@ public class Hero : MonoBehaviour
         }
     }
     #endregion
-
-
-
+    
     #region OnBattleScreen
+    
+    //When hero takes damage, function updates health, checks death and calls game manager to check if battle ended. 
     public void TakeDamage(float damage)
     {
-
         battleHealth -= damage;
-
         lifeDisplay.UpdateHealth();
-
         if (battleHealth <= 0)
         {
             battleHealth = 0;
@@ -213,21 +209,17 @@ public class Hero : MonoBehaviour
         Debug.Log($"{heroName} is attacking the enemy. Dealing {attackPower} of damage");
         enemyTarget.TakeDamage(attackPower);
     }
-
-
     #endregion
 
     #region OnEndScreen
     public void increaseExperience()
     {
         experience++;
-
         if ((experience == 5))
             increaseLevel();
     }
     void increaseLevel()
     {
-
         level++;
         maxHealth = maxHealth + maxHealth * attributeIncreasePerLevel;
         attackPower = attackPower + attackPower * attributeIncreasePerLevel;
@@ -239,7 +231,5 @@ public class Hero : MonoBehaviour
         isDead=false;
         lifeDisplay.UpdateHealth();
     }
-
     #endregion
-
 }
