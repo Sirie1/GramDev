@@ -102,13 +102,6 @@ public class DataManager : MonoBehaviour
         UserHeroProgress starterHero1 = InitializeHero(1);
         UserHeroProgress starterHero2 = InitializeHero(2);
         UserHeroProgress starterHero3 = InitializeHero(3);
-
-     //   userData.UserHeroes.Add(starterHero1);
-
-    //    userData.UserHeroes.Add(starterHero2);
-
-    //   userData.UserHeroes.Add(starterHero3);
-
     }
     //Initialize a UserHeroProgress type hero for the first time. Takes the hero ID and searchs for the appropiate attributes given the gameData for that hero ID loaded in awake.
     public UserHeroProgress InitializeHero(int heroID)

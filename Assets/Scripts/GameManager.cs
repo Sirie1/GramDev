@@ -55,8 +55,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
 
-        GoToSelectScreenFirstTime();
-       
+        // GoToSelectScreenFirstTime();
+        GoToSelectScreen();
+
+
     }
     # endregion
 
@@ -108,6 +110,7 @@ public class GameManager : MonoBehaviour
     {
         if (heroTeam.Count == 3)
         {
+            battleHeroSelected = null;
             selectScreen.gameObject.SetActive(false);
             battleScreen.gameObject.SetActive(true);
             endScreen.gameObject.SetActive(false);
@@ -181,9 +184,11 @@ public class GameManager : MonoBehaviour
             IncreaseTeamExperience();
             DataManager.Instance.userData.MatchesPlayed++;
             if (DataManager.Instance.userData.MatchesPlayed % 5 == 0)
+            {
                 GainRandomHero();
-            DataManager.Instance.SaveUserData();
-
+                endScreen.SetEndScreenWonHero();
+                DataManager.Instance.SaveUserData();
+            }
             GoToEndScreen();
         }
 
@@ -223,6 +228,7 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
+
     #region End Match Functionalities
     void IncreaseTeamExperience()
     {
@@ -260,6 +266,7 @@ public class GameManager : MonoBehaviour
             }
             //Now we chose a new hero
             int randomHeroIndex = Random.Range(0,possibleHeroes.Count);
+            
             DataManager.Instance.InitializeHero(possibleHeroes[randomHeroIndex]);
             Debug.Log ($" ID {possibleHeroes[randomHeroIndex]} initialized");
         }

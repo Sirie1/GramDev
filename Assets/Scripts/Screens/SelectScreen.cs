@@ -8,37 +8,49 @@ public class SelectScreen : MonoBehaviour
     public Hero heroCompPrefab;
     public GameObject HeroesListPrefab;
 
-    List<Hero> heroesChoosingList = new List<Hero>();
+    [SerializeField] List<Hero> heroesChoosingList = new List<Hero>();
     public Transform heroesListTransform;
 
 
     void Start()
     {
+        
+    }
+    private void OnEnable()
+    {
         ListHeroes();
     }
     public void ListHeroes()
     {
-        for (int i= 0;i<10;i++)
+        if (heroesChoosingList.Count > 0)
         {
-            heroesChoosingList.Add( Instantiate(heroCompPrefab, heroesListTransform));
-            heroesChoosingList[i].SetHeroByID(i + 1, true);
-            heroesChoosingList[i].HeroOnSelectScreen();
-            heroesChoosingList[i].HeroSelected(false);
-            //We need to check if we already have the hero
-            /*
-            for (int j = 0; j < DataManager.Instance.userData.UserHeroes.Count; j++)
-            {
-                if (DataManager.Instance.userData.UserHeroes[j].heroID == i )
-                {
-                    heroesChoosingList[i].HeroInCollection(true);
-
-                }
-                else
-                    heroesChoosingList[i].HeroInCollection(false);
-            }*/
-
+            UpdateHeroes();
         }
-        Debug.Log("List of heroes Created");
+        else
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                heroesChoosingList.Add(Instantiate(heroCompPrefab, heroesListTransform));
+                heroesChoosingList[i].SetHeroByID(i + 1, true);
+                heroesChoosingList[i].HeroOnSelectScreen();
+                heroesChoosingList[i].HeroSelected(false);
+                //We need to check if we already have the hero
+                /*
+                for (int j = 0; j < DataManager.Instance.userData.UserHeroes.Count; j++)
+                {
+
+                    if (DataManager.Instance.userData.UserHeroes[j].heroID == (i+1) )
+                    {
+                        heroesChoosingList[i].HeroInCollection(true);
+
+                    }
+                    else
+                        heroesChoosingList[i].HeroInCollection(false);
+                }*/
+
+            }
+            Debug.Log("List of heroes Created");
+        }
 
     }
 
