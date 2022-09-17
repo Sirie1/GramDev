@@ -1,7 +1,11 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
+//using UnityEngine.WSA;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,14 +25,20 @@ public class GameManager : MonoBehaviour
 
 
     //State management
-    private enum GameState
+    public enum GameState
     {
         HeroSelection,
         BattlePlayerTurn,
         BattleEnemyTurn,
+        IdleIntoEnemyTurn,
         EndBattle
     }
-    GameState gameState;
+    [SerializeField] GameState gameState;
+
+    public GameState GetGameState
+    {
+        get { return gameState; }
+    }
 
     #region Singleton 
     public static GameManager Instance
@@ -77,22 +87,17 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerTurnEnded()
     {
-        gameState = GameState.BattleEnemyTurn;
+        gameState = GameState.IdleIntoEnemyTurn;
     }
+    /*
+    public void EnemyIdleEnded()
+    {
+        gameState = GameState.BattleEnemyTurn;
+    }*/
     #endregion
 
     #region Screen Managing
 
-    /*public void GoToSelectScreenFirstTime()
-    {
-
-        heroTeam = new List<Hero>();
-
-        selectScreen.gameObject.SetActive(true);
-        battleScreen.gameObject.SetActive(false);
-        endScreen.gameObject.SetActive(false);
-        gameState = GameState.HeroSelection;
-    }*/
     public void GoToSelectScreen()
     {
 
@@ -111,6 +116,7 @@ public class GameManager : MonoBehaviour
         if (heroTeam.Count == 3)
         {
             battleHeroSelected = null;
+            isOnIdle = false;
             selectScreen.gameObject.SetActive(false);
             battleScreen.gameObject.SetActive(true);
             endScreen.gameObject.SetActive(false);
@@ -161,23 +167,24 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Battle Functionalities
-    /*public void SetBattleScreen()
-    {
-        battleScreen.gameObject.SetActive(true);
-    }*/
+
     public void AttackButton()
     {
-        if (battleHeroSelected == null)
-            Debug.Log("Please select Hero to attack");
-        else if (battleHeroSelected.IsDead)
+        if (gameState == GameState.BattlePlayerTurn)
         {
-            Debug.Log("Please select an alive Hero to attack");
+            if (battleHeroSelected == null)
+                Debug.Log("Please select Hero to attack");
+            else if (battleHeroSelected.IsDead)
+            {
+                Debug.Log("Please select an alive Hero to attack");
+            }
+            else
+            {
+                battleHeroSelected.Attack();
+                PlayerTurnEnded();
+            }
         }
-        else
-        {
-            battleHeroSelected.Attack();
-            PlayerTurnEnded();
-        }
+
     }
     public void CheckEnd()
     {
@@ -317,9 +324,34 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Battle Enemy Turn
+
+    public bool isOnIdle;
+    public void EnemyIdleStart()
+    {
+        isOnIdle = true;
+
+        enemySelected.transform.DOLocalMoveX(0f, 0.5f).SetEase(Ease.OutElastic);
+        enemySelected.transform.DOLocalMoveX(20f, 0.5f).SetEase(Ease.OutElastic);
+
+        StartCoroutine(FinishFirst(1.0f));
+    }
+
     public void EnemysTurn()
     {
         enemySelected.AttackHero();
+        enemySelected.transform.DOLocalMoveX(0f, 0.5f).SetEase(Ease.OutElastic);
+        enemySelected.transform.DOLocalMoveX(20f, 0.5f).SetEase(Ease.OutElastic);
+        EnemyTurnEnded();
+    }
+    IEnumerator FinishFirst(float waitTime)
+    {
+       
+        yield return new WaitForSeconds(waitTime);
+        
+
+        isOnIdle = false;
+        gameState = GameState.BattleEnemyTurn;
+
     }
 
     #endregion

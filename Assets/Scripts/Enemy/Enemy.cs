@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     float battleHealth;
     float attackPower;
     bool isDead;
+    public bool isAttackFinished;
     [SerializeField] int randomHero;
 
     List<int> possibleTargets = new List<int> ();
@@ -51,9 +52,10 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         enemyName = "Roach";
-        maxHealth = 150f;
+        //      maxHealth = 75f;
+        maxHealth = 75f;
         RestartHealth();
-        attackPower = 10f;
+ //       attackPower = 10f;
         isDead = false;
         possibleTargets.Add(0);
         possibleTargets.Add(1);
@@ -61,18 +63,18 @@ public class Enemy : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        
         battleHealth -= damage;
         lifeDisplay.UpdateHealth();
+        Debug.Log ($"Enemy {enemyName} attacked, now has {battleHealth} of health");
         if (battleHealth <= 0)
         {
             battleHealth = 0;
-            Debug.Log($"Enemy attacked, {battleHealth} of life remaining. Enemy is dead");
+            Debug.Log($"Enemy {enemyName} is dead");
             isDead = true;
             GameManager.Instance.CheckEnd();
         }
-        else 
-            Debug.Log($"Enemy attacked, {damage} of damage taken");
+        /*else
+           Debug.Log($"Enemy attacked, {damage} of damage taken");*/
 
     }
     //When enemy attacks first checks which heroes are dead to erase them from the random target
@@ -89,7 +91,7 @@ public class Enemy : MonoBehaviour
         Debug.Log($"Enemy attacking hero {battleScreen.heroTeam[possibleTargets[randomHero]].HeroName}");
         battleScreen.heroTeam[possibleTargets[randomHero]].TakeDamage(attackPower);
 
-        GameManager.Instance.EnemyTurnEnded();
+        //GameManager.Instance.EnemyTurnEnded();
     }
     public void RestartHealth()
     {

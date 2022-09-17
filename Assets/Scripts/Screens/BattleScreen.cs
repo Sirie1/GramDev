@@ -15,14 +15,13 @@ public class BattleScreen : MonoBehaviour
     int level;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        //GridSetup();
 
-    }
     void Update()
     {
-        if (!GameManager.Instance.isInBattlePlayerTurn())
+   
+        if((GameManager.Instance.GetGameState == GameManager.GameState.IdleIntoEnemyTurn)&&!GameManager.Instance.isOnIdle)
+            GameManager.Instance.EnemyIdleStart();
+        else if (GameManager.Instance.GetGameState == GameManager.GameState.BattleEnemyTurn)
             GameManager.Instance.EnemysTurn();
     }
     #region Screen Setup
@@ -45,7 +44,7 @@ public class BattleScreen : MonoBehaviour
             heroTeam[i].SetHeroByID(GameManager.Instance.heroTeam[i].HeroID, true);
             heroTeam[i].HeroOnBattleScreen();
             heroTeam[i].RestartHealth();
-            Debug.Log($"hero number {i+1} ready");
+           // Debug.Log($"hero number {i+1} ready");
             heroTeam[i].enemyTarget = enemy;
         }
     }
@@ -64,7 +63,6 @@ public class BattleScreen : MonoBehaviour
     void EnemySetup()
     {
         enemy.RestartHealth();
-      //  enemy.lifeDisplay.UpdateHealth();
     }
     #endregion
 

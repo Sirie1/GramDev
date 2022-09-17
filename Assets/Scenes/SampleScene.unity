@@ -1287,6 +1287,8 @@ MonoBehaviour:
   enemySelected: {fileID: 5152041}
   playerWonMatch: 0
   heroTeam: []
+  gameState: 0
+  isOnIdle: 0
 --- !u!4 &1022796128
 Transform:
   m_ObjectHideFlags: 0
@@ -1648,7 +1650,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1304595127
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2471,7 +2473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2494026722680407377, guid: 2a2143d12c9c5cc4aaa7c6452b36d030, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 57.6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2494026722680407377, guid: 2a2143d12c9c5cc4aaa7c6452b36d030, type: 3}
       propertyPath: m_AnchoredPosition.y

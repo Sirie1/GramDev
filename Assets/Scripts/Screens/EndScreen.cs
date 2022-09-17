@@ -11,7 +11,6 @@ public class EndScreen : MonoBehaviour
 
     void Start()
     {
-        //SetEndScreenText();
 
     }
     private void OnEnable()
@@ -33,8 +32,7 @@ public class EndScreen : MonoBehaviour
     public void SetEndScreenWonHero()
     {
         heroUnlockText.gameObject.SetActive(true);
-      //  DataManager.Instance.userData.UserHeroes.LastOrDefault().;
-      //  heroUnlockText.SetText( hero.HeroName);
+
     }
 
 }

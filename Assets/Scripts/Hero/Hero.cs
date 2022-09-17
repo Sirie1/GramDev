@@ -1,8 +1,9 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class Hero : MonoBehaviour
 {
     //Base Attributes. This attributes do not change when experience is gained or played a battle. They are changed if game balance or re-design is needed. 
@@ -141,6 +142,7 @@ public class Hero : MonoBehaviour
     public void OnHeroClick(Hero heroClicked)
     {
         GameManager.Instance.OnHeroSelect(heroClicked);
+        
     }
     //Set if hero is selected by passing state of selection bool as argument
     public void HeroSelected(bool state)
@@ -198,6 +200,10 @@ public class Hero : MonoBehaviour
     {
         battleHealth -= damage;
         lifeDisplay.UpdateHealth();
+
+        this.transform.DOLocalMoveX(0f, 0.5f).SetEase(Ease.OutElastic);
+        this.transform.DOLocalMoveX(-15f, 0.5f).SetEase(Ease.OutElastic);
+
         if (battleHealth <= 0)
         {
             battleHealth = 0;
@@ -209,10 +215,17 @@ public class Hero : MonoBehaviour
             Debug.Log($"{heroName} took {damage} damage. {battleHealth} health remaining");
     }
 
+
     public void Attack()
     {
         Debug.Log($"{heroName} is attacking the enemy. Dealing {attackPower} of damage");
+        this.transform.DOLocalMoveX(0f, 0.5f).SetEase(Ease.OutElastic);
+        this.transform.DOLocalMoveX(-15f, 0.5f).SetEase(Ease.OutElastic);
         enemyTarget.TakeDamage(attackPower);
+    }
+    private void OnAttackComplete()
+    {
+        this.transform.DOLocalMoveX(-4f, 0.5f);
     }
     #endregion
 
