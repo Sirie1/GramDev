@@ -330,17 +330,17 @@ public class GameManager : MonoBehaviour
     {
         isOnIdle = true;
 
-        enemySelected.transform.DOLocalMoveX(0f, 0.5f).SetEase(Ease.OutElastic);
-        enemySelected.transform.DOLocalMoveX(20f, 0.5f).SetEase(Ease.OutElastic);
 
+        enemySelected.transform.DOPunchPosition(new Vector3(10, 0, 0), 0.5f);
         StartCoroutine(FinishFirst(1.0f));
     }
 
     public void EnemysTurn()
     {
         enemySelected.AttackHero();
-        enemySelected.transform.DOLocalMoveX(0f, 0.5f).SetEase(Ease.OutElastic);
-        enemySelected.transform.DOLocalMoveX(20f, 0.5f).SetEase(Ease.OutElastic);
+
+        enemySelected.transform.DOPunchPosition(new Vector3(10, 0, 0), 0.5f);
+
         EnemyTurnEnded();
     }
     IEnumerator FinishFirst(float waitTime)

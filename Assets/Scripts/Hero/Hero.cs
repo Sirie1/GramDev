@@ -201,8 +201,7 @@ public class Hero : MonoBehaviour
         battleHealth -= damage;
         lifeDisplay.UpdateHealth();
 
-        this.transform.DOLocalMoveX(0f, 0.5f).SetEase(Ease.OutElastic);
-        this.transform.DOLocalMoveX(-15f, 0.5f).SetEase(Ease.OutElastic);
+        this.transform.DOPunchPosition(new Vector3(10, 0, 0), 0.5f);
 
         if (battleHealth <= 0)
         {
@@ -219,14 +218,16 @@ public class Hero : MonoBehaviour
     public void Attack()
     {
         Debug.Log($"{heroName} is attacking the enemy. Dealing {attackPower} of damage");
-        this.transform.DOLocalMoveX(0f, 0.5f).SetEase(Ease.OutElastic);
-        this.transform.DOLocalMoveX(-15f, 0.5f).SetEase(Ease.OutElastic);
+
+        this.transform.DOPunchPosition(new Vector3(10, 0, 0), 0.5f);
+        
         enemyTarget.TakeDamage(attackPower);
     }
+    /*
     private void OnAttackComplete()
     {
         this.transform.DOLocalMoveX(-4f, 0.5f);
-    }
+    }*/
     #endregion
 
     #region OnEndScreen

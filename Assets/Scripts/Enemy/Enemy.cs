@@ -55,7 +55,8 @@ public class Enemy : MonoBehaviour
         //      maxHealth = 75f;
         maxHealth = 75f;
         RestartHealth();
- //       attackPower = 10f;
+        //       attackPower = 10f;
+        attackPower = 20f;
         isDead = false;
         possibleTargets.Add(0);
         possibleTargets.Add(1);

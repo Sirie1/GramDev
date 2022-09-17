@@ -53,7 +53,7 @@ public class BattleScreen : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            heroTeam[i].SetHeroByID(i + 1, true);
+            heroTeam[i].SetHeroByID(GameManager.Instance.heroTeam[i].HeroID, true);
             heroTeam[i].HeroOnBattleScreen();
             heroTeam[i].HeroSelected(false);
             heroTeam[i].RestartHealth();

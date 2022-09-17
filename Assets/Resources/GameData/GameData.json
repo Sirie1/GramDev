@@ -1,0 +1,134 @@
+{
+    "HeroesStats": [
+        {
+            "heroID": 1,
+            "heroName": "Jim",
+            "heroColour": {
+                "r": 1.0,
+                "g": 0.0,
+                "b": 0.0,
+                "a": 1.0
+            },
+            "basemaxHealth": 100.0,
+            "baseAttackPower": 10.0,
+            "attributeIncreasePerLevel": 0.1
+        },
+        {
+            "heroID": 2,
+            "heroName": "Pam",
+            "heroColour": {
+                "r": 1.0,
+                "g": 0.8427866697311401,
+                "b": 0.0,
+                "a": 1.0
+            },
+            "basemaxHealth": 70.0,
+            "baseAttackPower": 7.0,
+            "attributeIncreasePerLevel": 0.1
+        },
+        {
+            "heroID": 3,
+            "heroName": "Darryl",
+            "heroColour": {
+                "r": 0.0,
+                "g": 1.0,
+                "b": 0.015195131301879883,
+                "a": 1.0
+            },
+            "basemaxHealth": 75.0,
+            "baseAttackPower": 8.0,
+            "attributeIncreasePerLevel": 0.1
+        },
+        {
+            "heroID": 4,
+            "heroName": "Stanley",
+            "heroColour": {
+                "r": 0.0,
+                "g": 0.10007739067077637,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "basemaxHealth": 110.0,
+            "baseAttackPower": 9.0,
+            "attributeIncreasePerLevel": 0.1
+        },
+        {
+            "heroID": 5,
+            "heroName": "Michael",
+            "heroColour": {
+                "r": 0.0,
+                "g": 1.0,
+                "b": 0.8982548713684082,
+                "a": 1.0
+            },
+            "basemaxHealth": 80.0,
+            "baseAttackPower": 13.0,
+            "attributeIncreasePerLevel": 0.1
+        },
+        {
+            "heroID": 6,
+            "heroName": "Dwight",
+            "heroColour": {
+                "r": 0.0,
+                "g": 1.0,
+                "b": 0.5628011226654053,
+                "a": 1.0
+            },
+            "basemaxHealth": 79.0,
+            "baseAttackPower": 12.0,
+            "attributeIncreasePerLevel": 0.1
+        },
+        {
+            "heroID": 7,
+            "heroName": "Creed",
+            "heroColour": {
+                "r": 0.0,
+                "g": 0.0,
+                "b": 0.0,
+                "a": 1.0
+            },
+            "basemaxHealth": 60.0,
+            "baseAttackPower": 15.0,
+            "attributeIncreasePerLevel": 0.1
+        },
+        {
+            "heroID": 8,
+            "heroName": "Kevin",
+            "heroColour": {
+                "r": 1.0,
+                "g": 0.0,
+                "b": 0.9118242263793945,
+                "a": 1.0
+            },
+            "basemaxHealth": 110.0,
+            "baseAttackPower": 6.0,
+            "attributeIncreasePerLevel": 0.1
+        },
+        {
+            "heroID": 9,
+            "heroName": "Meredith",
+            "heroColour": {
+                "r": 1.0,
+                "g": 0.44479167461395266,
+                "b": 0.0,
+                "a": 1.0
+            },
+            "basemaxHealth": 68.0,
+            "baseAttackPower": 11.0,
+            "attributeIncreasePerLevel": 0.1
+        },
+        {
+            "heroID": 10,
+            "heroName": "Oscar",
+            "heroColour": {
+                "r": 0.0,
+                "g": 0.5551173686981201,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "basemaxHealth": 60.0,
+            "baseAttackPower": 8.0,
+            "attributeIncreasePerLevel": 0.1
+        }
+    ]
+}

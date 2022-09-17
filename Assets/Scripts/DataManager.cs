@@ -43,7 +43,7 @@ public class DataManager : MonoBehaviour
     void Awake()
     {
         _instance = this;
-        LoadGameData();
+        LoadGameDataResource();
         isNewPlayer = false;
         LoadUserData();
         if(isNewPlayer)
@@ -128,9 +128,9 @@ public class DataManager : MonoBehaviour
     #endregion
 
     #region Save and Load 
-    //LoadGameData loads heroes
+    //LoadGameData loads heroes from a json anywhere in machine
     [ContextMenu("LoadGameData")]
-    public void LoadGameData()
+    public void LoadGameDataMachine()
     {
         string dir = Application.persistentDataPath + gameDataSaveDirectory;
         if (!Directory.Exists(dir))
@@ -140,6 +140,18 @@ public class DataManager : MonoBehaviour
         string json = File.ReadAllText(dir + gameDataFilename);
         gameDataLoad = JsonUtility.FromJson<GameData>(json);
     }
+    //LoadGameData loads heroes from a json anywhere in machine
+    public void LoadGameDataResource()
+    { 
+        TextAsset json = Resources.Load<TextAsset>("GameData/GameData");
+        if (json != null)
+            gameDataLoad = JsonUtility.FromJson<GameData>(json.text);
+        else
+            Debug.Log ("GameData could not be loaded");
+    }
+
+
+
     [ContextMenu ("SaveGameData")]
     //SaveGameData is used when designing the heroes
     public void SaveGameData()
