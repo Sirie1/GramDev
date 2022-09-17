@@ -24,15 +24,16 @@ public class Hero : MonoBehaviour
     int level;
 
     //Button display functionalities. Needed to references to objects needed by button and display functionalities. 
-    public Button myButton;
-    public LifeDisplay lifeDisplay;
-    public GameObject statsBackground;
-    public StatsDisplay statsDisplay;
-    public ButtonLongHold buttonLongHold;
-    public Transform selected;
+    [SerializeField] Button myButton;
+    [SerializeField] LifeDisplay lifeDisplay;
+    [SerializeField] GameObject statsBackground;
+    [SerializeField] StatsDisplay statsDisplay;
+    [SerializeField] ButtonLongHold buttonLongHold;
+    [SerializeField] Transform selected;
     //Other References needed
-    public Image heroImage;
+    [SerializeField] Image heroImage;
     public Enemy enemyTarget;
+
     #region Gets&Setters
 
     public int HeroID
@@ -79,17 +80,11 @@ public class Hero : MonoBehaviour
     #endregion
     void Start()
     {
-        //To test we set health from here/*
-        /*maxHealth = 100;
-        RestartHealth();
-        attackPower = 10;
-        experience = 0;
-        level = 0;
-        isDead = false;*/
-
         HeroSelected(false);
         buttonLongHold.gameObject.SetActive(false);
     }
+
+
     //SetHeroByID sets and configures a Hero on an Hero created object. It gathers information from GameData for basic non-user information about the Hero, and from
     //UserData if the hero already exists in UserData and have saved attributes. It also sets the value of isInCollection, depending if the ID was found in heroes
     //UserData list. 
@@ -97,7 +92,7 @@ public class Hero : MonoBehaviour
     {
         heroID = configID;
         //We need to get stats from data manager, basic data as name, colour, basic attributes, 
-        foreach (DataManager.HeroStats heroBlueprint in DataManager.Instance.gameDataLoad.HeroesStats)
+        foreach (DataManager.HeroStats heroBlueprint in DataManager.Instance.GameDataLoad.HeroesStats)
         {
             if (heroBlueprint.heroID == heroID)
             {

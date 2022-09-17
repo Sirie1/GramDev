@@ -44,11 +44,6 @@ public class Enemy : MonoBehaviour
     }
     #endregion
 
-    void Start()
-    {
-
-    }
-
     private void OnEnable()
     {
         enemyName = "Roach";
@@ -62,6 +57,8 @@ public class Enemy : MonoBehaviour
         possibleTargets.Add(1);
         possibleTargets.Add(2);
     }
+
+    #region Battle Functionalities
     public void TakeDamage(float damage)
     {
         battleHealth -= damage;
@@ -100,6 +97,6 @@ public class Enemy : MonoBehaviour
         isDead = false;
         lifeDisplay.UpdateHealth();
     }
-
+    # endregion
 
 }

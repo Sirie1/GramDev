@@ -7,31 +7,27 @@ using System.Linq;
 public class EndScreen : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI resultText;
-    [SerializeField] TextMeshProUGUI heroUnlockText;
+   // [SerializeField] TextMeshProUGUI heroUnlockText;
+    [SerializeField] GameObject heroUnlockPopUp;
 
-    void Start()
-    {
-
-    }
     private void OnEnable()
     {
         SetEndScreenText();
     }
     private void OnDisable()
     {
-        heroUnlockText.gameObject.SetActive(false);
+        heroUnlockPopUp.gameObject.SetActive(false);
     }
     void SetEndScreenText()
     {
-        if (GameManager.Instance.playerWonMatch)
+        if (GameManager.Instance.PlayerWonMatch)
             resultText.SetText("Match won");
         else
             resultText.SetText("Match lost");
-        heroUnlockText.gameObject.SetActive(false);
-    }
-    public void SetEndScreenWonHero()
-    {
-        heroUnlockText.gameObject.SetActive(true);
+        // 8heroUnlockText.gameObject.SetActive(GameManager.Instance.NewHero);
+        if (GameManager.Instance.NewHero)
+            heroUnlockPopUp.gameObject.SetActive(true);
+
 
     }
 

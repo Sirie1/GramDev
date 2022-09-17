@@ -7,12 +7,11 @@ using UnityEngine.UI;
 public class LifeDisplay : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Image liferemaining;
-    public bool isHero;
+    [SerializeField] Image liferemaining;
+    [SerializeField] bool isHero;
 
-    void Start()
+    private void OnEnable()
     {
-        // On start we check if we are in hero or enemy 
         CheckIfHero();
         // We initiallize the filling amount to full
         liferemaining.fillAmount = 1;
@@ -34,6 +33,7 @@ public class LifeDisplay : MonoBehaviour
 
     }
 
+    //Same function can be called from either hero or enemy
     private void CheckIfHero()
     {
         if (!(GetComponentInParent<Hero>() == null))

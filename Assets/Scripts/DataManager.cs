@@ -15,13 +15,18 @@ public class DataManager : MonoBehaviour
     private string gameDataFilename = "GameData.sav";
     private string userDataSaveDirectory = "/UserData/";
     private string userDataFilename = "UserData.sav";
-    
 
-    public GameData gameDataSave;
-    public GameData gameDataLoad;
+
+    [SerializeField] GameData gameDataSave;
+    [SerializeField] GameData gameDataLoad;
     public UserData userData;
 
-    public bool isNewPlayer;
+    [SerializeField] bool isNewPlayer;
+
+    public GameData GameDataLoad
+    {
+        get { return gameDataLoad;}
+    }
 
     #region Singleton
     public static DataManager Instance
@@ -50,10 +55,7 @@ public class DataManager : MonoBehaviour
             InitializeFirstHeroes();
         SaveUserData();
     }
-    void Start()
-    {
-        
-    }
+
     #endregion
 
     #region Class definitions formats to save
@@ -88,8 +90,6 @@ public class DataManager : MonoBehaviour
     [Serializable]
     public class UserData
     {
-        //    public List<int> UserHeroesListByID;
-
         public List<UserHeroProgress> UserHeroes;
         public int MatchesPlayed;
         public int LastLevelPassed;
@@ -203,6 +203,5 @@ public class DataManager : MonoBehaviour
 
     }
     #endregion
-
 
 }

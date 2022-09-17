@@ -13,18 +13,35 @@ public class GameManager : MonoBehaviour
 
     //Screens references
     [SerializeField] BattleScreen battleScreen;
-    public SelectScreen selectScreen;
-    public EndScreen endScreen;
+    [SerializeField] SelectScreen selectScreen;
+    [SerializeField] EndScreen endScreen;
     //Object managed references
-    public Hero battleHeroSelected;
-    public Enemy enemySelected;
-    public bool playerWonMatch;
+    [SerializeField] Hero battleHeroSelected;
+    [SerializeField] Enemy enemySelected;
+    [SerializeField] bool playerWonMatch;
 
     //Definitions needed
-    public List<Hero> heroTeam;
+    [SerializeField] List<Hero> heroTeam;
+    [SerializeField] bool newHero;
 
+    #region Getters
 
-    //State management
+    public bool NewHero
+    {
+        get { return newHero;}
+    }
+    public bool PlayerWonMatch
+    {
+        get { return playerWonMatch;}
+    }
+
+    public List<Hero> HeroTeam
+    {
+        get { return heroTeam;}
+    }
+    #endregion
+
+    #region Game State Manage
     public enum GameState
     {
         HeroSelection,
@@ -39,6 +56,8 @@ public class GameManager : MonoBehaviour
     {
         get { return gameState; }
     }
+
+    #endregion
 
     #region Singleton 
     public static GameManager Instance
@@ -186,6 +205,7 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
     public void CheckEnd()
     {
         //Logic if game Won
@@ -194,10 +214,12 @@ public class GameManager : MonoBehaviour
             playerWonMatch = true;
             IncreaseTeamExperience();
             DataManager.Instance.userData.MatchesPlayed++;
+            newHero = false;
             if (DataManager.Instance.userData.MatchesPlayed % 5 == 0)
             {
                 GainRandomHero();
-                endScreen.SetEndScreenWonHero();
+                newHero =true;
+              //  endScreen.SetEndScreenWonHero();
                 DataManager.Instance.SaveUserData();
             }
             GoToEndScreen();

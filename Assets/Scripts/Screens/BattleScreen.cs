@@ -8,13 +8,6 @@ public class BattleScreen : MonoBehaviour
     public Enemy enemy;
     [SerializeField] Transform heroTeamLayout;
     [SerializeField] Hero heroPrefab;
-    Hero newHero;
-
-    Hero battleHeroSelected;
-
-    int level;
-
-    // Start is called before the first frame update
 
     void Update()
     {
@@ -24,6 +17,7 @@ public class BattleScreen : MonoBehaviour
         else if (GameManager.Instance.GetGameState == GameManager.GameState.BattleEnemyTurn)
             GameManager.Instance.EnemysTurn();
     }
+
     #region Screen Setup
     public void GridFirstSetup()
     {
@@ -41,7 +35,7 @@ public class BattleScreen : MonoBehaviour
         for (int i=0;i<3;i++)
         {
             heroTeam.Add(Instantiate(heroPrefab, heroTeamLayout));
-            heroTeam[i].SetHeroByID(GameManager.Instance.heroTeam[i].HeroID, true);
+            heroTeam[i].SetHeroByID(GameManager.Instance.HeroTeam[i].HeroID, true);
             heroTeam[i].HeroOnBattleScreen();
             heroTeam[i].RestartHealth();
            // Debug.Log($"hero number {i+1} ready");
@@ -53,7 +47,7 @@ public class BattleScreen : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            heroTeam[i].SetHeroByID(GameManager.Instance.heroTeam[i].HeroID, true);
+            heroTeam[i].SetHeroByID(GameManager.Instance.HeroTeam[i].HeroID, true);
             heroTeam[i].HeroOnBattleScreen();
             heroTeam[i].HeroSelected(false);
             heroTeam[i].RestartHealth();

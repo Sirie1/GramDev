@@ -11,11 +11,6 @@ public class SelectScreen : MonoBehaviour
     [SerializeField] List<Hero> heroesChoosingList = new List<Hero>();
     public Transform heroesListTransform;
 
-
-    void Start()
-    {
-        
-    }
     private void OnEnable()
     {
         ListHeroes();
