@@ -105,7 +105,7 @@ public class Hero : MonoBehaviour
                 //heroImage.tintColor = heroColour;
                 heroName = heroBlueprint.heroName;
                 this.gameObject.name = heroName;
-                Debug.Log ($"{heroName} was configured");
+                //Debug.Log ($"{heroName} was configured");
                 basemaxHealth = heroBlueprint.basemaxHealth;
                 baseAttackPower = heroBlueprint.baseAttackPower;
                 attributeIncreasePerLevel = heroBlueprint.attributeIncreasePerLevel;
@@ -131,8 +131,8 @@ public class Hero : MonoBehaviour
             attackPower = baseAttackPower;
             experience = 0;
             level = 1;
-            if (AddToCollection)
-                isInCollection = true;
+            /*if (AddToCollection)
+                isInCollection = true;*/
         }
     }
 
@@ -172,16 +172,21 @@ public class Hero : MonoBehaviour
     //This function may be obsolete, need to work in isInCollection bool
     public void HeroInCollection(bool isInCollection)
     {
-        if (!isInCollection)
+        this.isInCollection = isInCollection;
+        if (isInCollection)
         {
-            heroImage.color = Color.gray;
-            myButton.interactable = false;
+            heroImage.color = heroColour;
+            myButton.interactable = true;
+            //Debug.Log($"Enabling collection for hero {HeroID}");
+
+            
             //other option yourButton.enabled = false;
         }
         else
         {
-            heroImage.color = heroColour;
-            myButton.interactable = true;
+            heroImage.color = Color.gray;
+            myButton.interactable = false;
+            //Debug.Log($"Disabling collection for hero {HeroID}");
         }
     }
     #endregion

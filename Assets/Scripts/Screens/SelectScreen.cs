@@ -24,7 +24,9 @@ public class SelectScreen : MonoBehaviour
     {
         if (heroesChoosingList.Count > 0)
         {
+
             UpdateHeroes();
+            //Debug.Log("List of heroes already existed, only uptdating");
         }
         else
         {
@@ -35,21 +37,19 @@ public class SelectScreen : MonoBehaviour
                 heroesChoosingList[i].HeroOnSelectScreen();
                 heroesChoosingList[i].HeroSelected(false);
                 //We need to check if we already have the hero
-                /*
+         
+                heroesChoosingList[i].HeroInCollection(false);
                 for (int j = 0; j < DataManager.Instance.userData.UserHeroes.Count; j++)
                 {
-
-                    if (DataManager.Instance.userData.UserHeroes[j].heroID == (i+1) )
+                    if (DataManager.Instance.userData.UserHeroes[j].heroID == heroesChoosingList[i].HeroID )
                     {
                         heroesChoosingList[i].HeroInCollection(true);
-
+                       // Debug.Log("Heroe was enabled");
                     }
-                    else
-                        heroesChoosingList[i].HeroInCollection(false);
-                }*/
+                }
 
             }
-            Debug.Log("List of heroes Created");
+           // Debug.Log("List of heroes Created");
         }
 
     }
@@ -62,7 +62,15 @@ public class SelectScreen : MonoBehaviour
             heroesChoosingList[i].SetHeroByID(i + 1, true);
             heroesChoosingList[i].HeroOnSelectScreen();
             heroesChoosingList[i].HeroSelected(false);
-
+            heroesChoosingList[i].HeroInCollection(false);
+            for (int j = 0; j < DataManager.Instance.userData.UserHeroes.Count; j++)
+            {
+                if (DataManager.Instance.userData.UserHeroes[j].heroID == heroesChoosingList[i].HeroID)
+                {
+                    heroesChoosingList[i].HeroInCollection(true);
+                   // Debug.Log($"Hero {heroesChoosingList[i].HeroID} enabled to choose");
+                }
+            }
         }
     }
 }

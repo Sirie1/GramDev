@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
 
     #region Screen Managing
 
-    public void GoToSelectScreenFirstTime()
+    /*public void GoToSelectScreenFirstTime()
     {
 
         heroTeam = new List<Hero>();
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
         battleScreen.gameObject.SetActive(false);
         endScreen.gameObject.SetActive(false);
         gameState = GameState.HeroSelection;
-    }
+    }*/
     public void GoToSelectScreen()
     {
 
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
         selectScreen.gameObject.SetActive(true);
         battleScreen.gameObject.SetActive(false);
         endScreen.gameObject.SetActive(false);
-        selectScreen.UpdateHeroes();
+        //selectScreen.UpdateHeroes();
         gameState = GameState.HeroSelection;
     }
 
@@ -138,12 +138,16 @@ public class GameManager : MonoBehaviour
     void HeroSelectedOnSelection(Hero heroSelected)
     {
         //Logic if list is not full, recurring clicking on hero should add/remove from list
-        if (heroTeam.Count < 3)
+        if (heroTeam.Count <= 3)
         {
             if(!heroTeam.Contains(heroSelected))
             {
-                heroTeam.Add(heroSelected);
-                heroSelected.HeroSelected(true);
+                if (heroTeam.Count < 3)
+                {
+                    heroTeam.Add(heroSelected);
+                    heroSelected.HeroSelected(true);
+                }
+
             }
             else
             {
@@ -299,14 +303,15 @@ public class GameManager : MonoBehaviour
     #region Manage Hero Selection
     public void OnHeroSelect(Hero heroSelected)
     {
-        if (gameState == GameState.BattlePlayerTurn)
-        {
-            HeroSelectedOnBattle(heroSelected);
-        }
-        else if (gameState == GameState.HeroSelection)
-        {
-            HeroSelectedOnSelection(heroSelected);
-        }
+            if (gameState == GameState.BattlePlayerTurn)
+            {
+                HeroSelectedOnBattle(heroSelected);
+            }
+            else if (gameState == GameState.HeroSelection)
+            {
+                HeroSelectedOnSelection(heroSelected);
+            }
+
     }
 
     #endregion

@@ -45,6 +45,11 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+
+    }
+
+    private void OnEnable()
+    {
         enemyName = "Roach";
         maxHealth = 150f;
         RestartHealth();
@@ -53,8 +58,6 @@ public class Enemy : MonoBehaviour
         possibleTargets.Add(0);
         possibleTargets.Add(1);
         possibleTargets.Add(2);
-
-
     }
     public void TakeDamage(float damage)
     {
