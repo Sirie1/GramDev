@@ -38,13 +38,11 @@ public class BattleScreen : MonoBehaviour
             heroTeam[i].SetHeroByID(GameManager.Instance.HeroTeam[i].HeroID, true);
             heroTeam[i].HeroOnBattleScreen();
             heroTeam[i].RestartHealth();
-           // Debug.Log($"hero number {i+1} ready");
             heroTeam[i].enemyTarget = enemy;
         }
     }
     public void UpdateHeroes()
     {
-
         for (int i = 0; i < 3; i++)
         {
             heroTeam[i].SetHeroByID(GameManager.Instance.HeroTeam[i].HeroID, true);

@@ -26,7 +26,7 @@ public class StatsDisplay : MonoBehaviour
 
     private void GetCurrentStats()
     {
-        StatsText.SetText($" Hero Name: {hero.HeroName} \n Health: {hero.MaxHealth} \n ?n Attck: {hero.AttackPower} \n Level {hero.Level}");
+        StatsText.SetText($" Hero Name: {hero.HeroName} \n Health: {hero.MaxHealth} \n Attack: {hero.AttackPower} \n Level {hero.Level}");
 
     }
 }

@@ -83,11 +83,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
-        // GoToSelectScreenFirstTime();
         GoToSelectScreen();
-
-
     }
     # endregion
 
@@ -108,11 +104,6 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameState.IdleIntoEnemyTurn;
     }
-    /*
-    public void EnemyIdleEnded()
-    {
-        gameState = GameState.BattleEnemyTurn;
-    }*/
     #endregion
 
     #region Screen Managing
@@ -125,7 +116,6 @@ public class GameManager : MonoBehaviour
         selectScreen.gameObject.SetActive(true);
         battleScreen.gameObject.SetActive(false);
         endScreen.gameObject.SetActive(false);
-        //selectScreen.UpdateHeroes();
         gameState = GameState.HeroSelection;
     }
 
@@ -273,7 +263,6 @@ public class GameManager : MonoBehaviour
                 {
                     if(DataManager.Instance.userData.UserHeroes[i].heroID == hero.HeroID)
                     {
-                        //DataManager.Instance.userData.UserHeroes[i].experience++;
                         hero.increaseExperience();
                         SaveTeamHeroNewStats();
                     }

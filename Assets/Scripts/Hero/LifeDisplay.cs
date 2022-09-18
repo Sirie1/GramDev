@@ -23,16 +23,12 @@ public class LifeDisplay : MonoBehaviour
         if (isHero)
         {
             liferemaining.fillAmount = GetComponentInParent<Hero>().BattleHealth / GetComponentInParent<Hero>().MaxHealth;
-           // Debug.Log($"{liferemaining.fillAmount} is the fill amount");
         }
         else
         {
             liferemaining.fillAmount = GetComponentInParent<Enemy>().BattleHealth / GetComponentInParent<Enemy>().MaxHealth;
-           // Debug.Log($"Enemy health is {GetComponentInParent<Enemy>().BattleHealth}");
         }
-
     }
-
     //Same function can be called from either hero or enemy
     private void CheckIfHero()
     {

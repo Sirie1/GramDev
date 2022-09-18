@@ -15,7 +15,6 @@ public class Enemy : MonoBehaviour
 
     List<int> possibleTargets = new List<int> ();
     public BattleScreen battleScreen;
-  //  public Hero targetHero;
     public LifeDisplay lifeDisplay;
     #region Gets & Setters
     public string EnemyName
@@ -47,10 +46,8 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         enemyName = "Roach";
-        //      maxHealth = 75f;
         maxHealth = 75f;
         RestartHealth();
-        //       attackPower = 10f;
         attackPower = 20f;
         isDead = false;
         possibleTargets.Add(0);
@@ -71,9 +68,6 @@ public class Enemy : MonoBehaviour
             isDead = true;
             GameManager.Instance.CheckEnd();
         }
-        /*else
-           Debug.Log($"Enemy attacked, {damage} of damage taken");*/
-
     }
     //When enemy attacks first checks which heroes are dead to erase them from the random target
     public void AttackHero()
@@ -88,8 +82,6 @@ public class Enemy : MonoBehaviour
         randomHero = Random.Range(0, possibleTargets.Count);
         Debug.Log($"Enemy attacking hero {battleScreen.heroTeam[possibleTargets[randomHero]].HeroName}");
         battleScreen.heroTeam[possibleTargets[randomHero]].TakeDamage(attackPower);
-
-        //GameManager.Instance.EnemyTurnEnded();
     }
     public void RestartHealth()
     {

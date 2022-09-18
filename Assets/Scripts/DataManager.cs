@@ -6,16 +6,16 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class DataManager : MonoBehaviour
 {
     private static DataManager _instance;
 
     private string gameDataSaveDirectory = "/GameData/";
-    private string gameDataFilename = "GameData.sav";
+    private string gameDataFilename = "GameData.json";
     private string userDataSaveDirectory = "/UserData/";
-    private string userDataFilename = "UserData.sav";
-
+    private string userDataFilename = "UserData.json";
 
     [SerializeField] GameData gameDataSave;
     [SerializeField] GameData gameDataLoad;
@@ -121,8 +121,6 @@ public class DataManager : MonoBehaviour
             }
         }
         userData.UserHeroes.Add(myNewHero);
-        
-        
         return myNewHero;
     }
     #endregion
@@ -145,13 +143,16 @@ public class DataManager : MonoBehaviour
     { 
         TextAsset json = Resources.Load<TextAsset>("GameData/GameData");
         if (json != null)
+        {
             gameDataLoad = JsonUtility.FromJson<GameData>(json.text);
+        }
+
         else
-            Debug.Log ("GameData could not be loaded");
+        {
+            Debug.Log("GameData could not be loaded");
+        }
+
     }
-
-
-
     [ContextMenu ("SaveGameData")]
     //SaveGameData is used when designing the heroes
     public void SaveGameData()
@@ -175,6 +176,12 @@ public class DataManager : MonoBehaviour
         {
             Directory.CreateDirectory(dir);
             Debug.Log($"Directory {dir} was created");
+        }
+
+        if (!File.Exists(dir + userDataFilename))
+        {
+
+            File.Create(dir + userDataFilename).Close();
         }
         string json = JsonUtility.ToJson(userData, true);
         File.WriteAllText(dir + userDataFilename, json);
@@ -200,7 +207,6 @@ public class DataManager : MonoBehaviour
             isNewPlayer = true;
             return;
         }
-
     }
     #endregion
 

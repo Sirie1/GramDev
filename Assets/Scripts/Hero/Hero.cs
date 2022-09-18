@@ -98,7 +98,6 @@ public class Hero : MonoBehaviour
             {
                 heroColour = heroBlueprint.heroColour;
                 heroImage.color = heroColour;
-                //heroImage.tintColor = heroColour;
                 heroName = heroBlueprint.heroName;
                 this.gameObject.name = heroName;
                 //Debug.Log ($"{heroName} was configured");
@@ -127,8 +126,6 @@ public class Hero : MonoBehaviour
             attackPower = baseAttackPower;
             experience = 0;
             level = 1;
-            /*if (AddToCollection)
-                isInCollection = true;*/
         }
     }
 
@@ -218,11 +215,6 @@ public class Hero : MonoBehaviour
         
         enemyTarget.TakeDamage(attackPower);
     }
-    /*
-    private void OnAttackComplete()
-    {
-        this.transform.DOLocalMoveX(-4f, 0.5f);
-    }*/
     #endregion
 
     #region OnEndScreen
